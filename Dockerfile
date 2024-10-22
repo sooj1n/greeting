@@ -1,6 +1,9 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jdk-alpine as build
+WORKDIR /land
+COPY . .
+RUN ./gradlew clean bootJar
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
+FROM eclipse-temurin:17-jre-alpine as run
+COPY --from=build /land/build/libs/*.jar app.jar
 
 ENTRYPOINT ["java","-jar","/app.jar"]
