@@ -1,17 +1,28 @@
 # Use root/example as user/password credentials
-version: '3.1'
-
 services:
-
-  db:
+  database:
     image: mariadb
-    restart: always
+    container_name: todo-mariadb
     environment:
       MARIADB_ROOT_PASSWORD: example
+      MARIADB_USER: todo_user
+      MARIADB_PASSWORD: todo_passwd
+      MARIADB_DATABASE: encore
+    volumes:
+      - ./src/main/resources/db_config/initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - 6033:3306
 
-  adminer:
-    image: adminer
+  app:
+    container_name: todo-app
+    build: .
     restart: always
     ports:
       - 8080:8080
+    depends_on:
+      - database
+    links:
+      - database
+    platform: linux/amd64
+
 
