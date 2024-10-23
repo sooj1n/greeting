@@ -8,7 +8,7 @@ import shop.samdul.greeting.mapper.TodoMapper;
 import java.util.List;
 
 @Service
-public class TodoService {
+public class TodoJpaService {
 
     @Autowired
     TodoMapper todoMapper;

@@ -15,4 +15,21 @@
                 FROM ENCORE_TODO_TBL
                 WHERE id = #{id};
         </select>
+
+
+        <delete id="deleteById">
+                DELETE FROM ENCORE_TODO_TBL
+                WHERE id=#{id}
+        </delete>
+        <insert id="createEntity">
+                INSERT INTO ENCORE_TODO_TBL(SUBJECT, BODY, COMPLETED) VALUES (#{subject}, #{body}, #{completed});
+        </insert>
+        <update id="updateById">
+                UPDATE ENCORE_TODO_TBL
+                SET subject = #{subject}, body = #{body}, completed = #{completed}
+                WHERE id=#{id}
+                <!--        INSERT INTO ENCORE_TODO_TBL(SUBJECT, BODY, COMPLETED) VALUES (#{id}, #{id}, #{id});-->
+        </update>
+
+
 </mapper>
