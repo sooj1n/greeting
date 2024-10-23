@@ -19,4 +19,8 @@ public class TodoService {
         System.out.println("[todos]: " + todos.size());
         return todos;
     }
+
+    public TodoEntity findById(Integer id) {
+        return todoMapper.findById(id);
+    }
 }
